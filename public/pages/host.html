@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <div id="info">
+    <div id="players" class="in4" style="width:500px">
+      <p style="font-size: 15pt;">NC1 & NC2</p>
+    </div>
+    <div id="blank" class="in4" style="width:1000px"></div>
+    <div id="qnumber" class="in4" style="width:100px">
+      <p style="font-size: 15pt;">Câu</p>
+    </div>
+    <div id="category" class="in4" style="width:200px">
+      <p style="font-size: 15pt;">CĐ</p>
+    </div>
+    <div id="money" class="in4" style="width:200px">
+      <p style="font-size: 15pt;">200.000.000 đồng</p>
+    </div>
+    <div id="timer" class="in4" style="width:75px">
+      <p style="font-size: 15pt;">60</p>
+    </div>
+  </div>
+  <div style="text-align: center; border:3px solid white">
+    <p id="q">CH</p>
+  </div>
+  <div id="ans">
+    <div id="a1" class="a">
+      <p>a1</p>
+    </div>
+    <div id="a2" class="a">
+      <p>a2</p>
+    </div>
+    <div id="a3" class="a">
+      <p>a3</p>
+    </div>
+    <div id="a4" class="a">
+      <p>a4</p>
+    </div>
+  </div>
+  <div id="moneyContainer">
+    <div id="money1" class="money">
+      <p style="font-size:15pt;color:black;margin:0">200.000.000<span> đồng</span></p>
+    </div>
+    <div id="money2" class="money">
+      <p style="font-size:15pt;color:black;margin:0">150.000.000<span> đồng</span></p>
+    </div>
+    <div id="money3" class="money">
+      <p style="font-size:15pt;color:black;margin:0">200.000.000<span> đồng</span></p>
+    </div>
+    <div id="money4" class="money">
+      <p style="font-size:15pt;color:black;margin:0">150.000.000<span> đồng</span></p>
+    </div>
+
+  </div>
+  <div id="plusandminus">
+    <button id="plus1">+</button>
+    <button id="minus1">-</button>
+    <button id="plus2">+</button>
+    <button id="minus2">-</button>
+    <button id="plus3">+</button>
+    <button id="minus3">-</button>
+    <button id="plus4">+</button>
+    <button id="minus4">-</button>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const playerSocket=io('/player');
+    const hostSocket=io('/host');
+
+    document.getElementById('plus1').addEventListener('click',()=>{
+      hostSocket.emit('plus1');
+    });
+  </script>
+</body>
+
+</html>

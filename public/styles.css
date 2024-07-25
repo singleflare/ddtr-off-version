@@ -1,0 +1,71 @@
+p {
+  color: white;
+  font-size: 20pt;
+}
+
+body {
+  background-color: black;
+}
+
+button {
+  width: 250px;
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+  font-size: 20pt;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+#ans {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+#q {
+  height: 150px;
+}
+
+.a {
+  background-color: black;
+  width: 500px;
+  height: 200px;
+  text-align: center;
+  border: 3px solid white;
+}
+
+#plusandminus {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.in4 {
+  border: 3px solid white;
+  text-align: center;
+}
+
+#moneyContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.money {
+  text-align: center;
+  background-color: white;
+  width: 500px;
+  color: black;
+}
