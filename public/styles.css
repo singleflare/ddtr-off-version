@@ -69,3 +69,8 @@ button:hover {
   width: 500px;
   color: black;
 }
+
+button:disabled {
+  background-color: grey;
+  color: black;
+}

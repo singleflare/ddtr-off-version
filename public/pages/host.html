@@ -21,7 +21,7 @@
       <p style="font-size: 15pt;">CĐ</p>
     </div>
     <div id="money" class="in4" style="width:200px">
-      <p style="font-size: 15pt;">200.000.000 đồng</p>
+      <p style="font-size: 15pt;" id="remainMoneyText">200<span>.000.000 đồng</span></p>
     </div>
     <div id="timer" class="in4" style="width:75px">
       <p style="font-size: 15pt;">60</p>
@@ -46,16 +46,16 @@
   </div>
   <div id="moneyContainer">
     <div id="money1" class="money">
-      <p style="font-size:15pt;color:black;margin:0">200.000.000<span> đồng</span></p>
+      <p style="font-size:15pt;color:black;margin:0" id="money1text">0<span> đồng</span></p>
     </div>
     <div id="money2" class="money">
-      <p style="font-size:15pt;color:black;margin:0">150.000.000<span> đồng</span></p>
+      <p style="font-size:15pt;color:black;margin:0" id="money2text">0<span> đồng</span></p>
     </div>
     <div id="money3" class="money">
-      <p style="font-size:15pt;color:black;margin:0">200.000.000<span> đồng</span></p>
+      <p style="font-size:15pt;color:black;margin:0" id="money3text">0<span> đồng</span></p>
     </div>
     <div id="money4" class="money">
-      <p style="font-size:15pt;color:black;margin:0">150.000.000<span> đồng</span></p>
+      <p style="font-size:15pt;color:black;margin:0" id="money4text">0<span> đồng</span></p>
     </div>
 
   </div>
@@ -69,14 +69,23 @@
     <button id="plus4">+</button>
     <button id="minus4">-</button>
   </div>
+
+  <div id="controlButtons" style="margin-top:5px">
+    <button id="disableA4">Tắt đáp án 4</button>
+    <button id="disableA1">Tắt đáp án 1</button>
+    <button id="disableAllMoneyBtn">Tắt cộng/trừ</button>
+  </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const playerSocket=io('/player');
-    const hostSocket=io('/host');
+    const playerSocket = io('/player');
+    const hostSocket = io('/host');
 
-    document.getElementById('plus1').addEventListener('click',()=>{
+    document.getElementById('plus1').addEventListener('click', () => {
       hostSocket.emit('plus1');
     });
+
+
   </script>
 </body>
 
