@@ -5,29 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Host</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../stylesHost.css">
+
 </head>
 
 <body>
+  <input type="file" id="xlsxFileInput">
   <div id="info">
     <div id="players" class="in4" style="width:500px">
-      <p style="font-size: 15pt;">NC1 & NC2</p>
+      <p>NC1 & NC2</p>
     </div>
     <div id="blank" class="in4" style="width:1000px"></div>
     <div id="qnumber" class="in4" style="width:100px">
-      <p style="font-size: 15pt;">Câu</p>
+      <p>Câu</p>
     </div>
     <div id="category" class="in4" style="width:200px">
-      <p style="font-size: 15pt;">CĐ</p>
+      <p>CĐ</p>
     </div>
     <div id="money" class="in4" style="width:200px">
-      <p style="font-size: 15pt;" id="remainMoneyText">200<span>.000.000 đồng</span></p>
+      <p id="remainMoneyText">200<span>.000.000 đồng</span></p>
     </div>
     <div id="timer" class="in4" style="width:75px">
-      <p style="font-size: 15pt;">60</p>
+      <p>60</p>
     </div>
   </div>
-  <div style="text-align: center; border:3px solid white">
+  <div style="text-align: center; border:3px solid white;height:100px">
     <p id="q">CH</p>
   </div>
   <div id="ans">
@@ -46,47 +48,62 @@
   </div>
   <div id="moneyContainer">
     <div id="money1" class="money">
-      <p style="font-size:15pt;color:black;margin:0" id="money1text">0<span> đồng</span></p>
+      <p style="color:black;margin:0" id="money1text">0<span> đồng</span></p>
     </div>
     <div id="money2" class="money">
-      <p style="font-size:15pt;color:black;margin:0" id="money2text">0<span> đồng</span></p>
+      <p style="color:black;margin:0" id="money2text">0<span> đồng</span></p>
     </div>
     <div id="money3" class="money">
-      <p style="font-size:15pt;color:black;margin:0" id="money3text">0<span> đồng</span></p>
+      <p style="color:black;margin:0" id="money3text">0<span> đồng</span></p>
     </div>
     <div id="money4" class="money">
-      <p style="font-size:15pt;color:black;margin:0" id="money4text">0<span> đồng</span></p>
+      <p style="color:black;margin:0" id="money4text">0<span> đồng</span></p>
     </div>
-
-  </div>
-  <div id="plusandminus">
-    <button id="plus1">+</button>
-    <button id="minus1">-</button>
-    <button id="plus2">+</button>
-    <button id="minus2">-</button>
-    <button id="plus3">+</button>
-    <button id="minus3">-</button>
-    <button id="plus4">+</button>
-    <button id="minus4">-</button>
   </div>
 
   <div id="controlButtons" style="margin-top:5px">
+    <span>Tắt đáp án/nút</span>
     <button id="disableA4">Tắt đáp án 4</button>
     <button id="disableA1">Tắt đáp án 1</button>
     <button id="disableAllMoneyBtn">Tắt cộng/trừ</button>
+    <hr>
+    <span>Đáp án sai</span>
+    <button id="ans1Wrong">Đáp án 1 sai</button>
+    <button id="ans2Wrong">Đáp án 2 sai</button>
+    <button id="ans3Wrong">Đáp án 3 sai</button>
+    <button id="ans4Wrong">Đáp án 4 sai</button>
+    <hr>
+    <span>Đồng hồ</span>
+    <button id="60s">60 giây</button>
+    <button id="30s">30 giây</button>
+    <button id="endClock">Dừng thời gian</button>
+    <button id="resetClock">Đặt lại thời gian</button>
+    <hr>
+    <span>Tải câu hỏi</span>
+    <button id="uploadQ">Tải bộ câu hỏi</button>
+    <button id="toQ1">Tải câu 1</button>
+    <button id="toQ2">Tải câu 2</button>
+    <button id="toQ3">Tải câu 3</button>
+    <button id="toQ4">Tải câu 4</button>
+    <button id="toQ5">Tải câu 5</button>
+    <button id="toQ6">Tải câu 6</button>
+    <button id="toQ7">Tải câu 7</button>
+    <button id="toQ8">Tải câu 8</button>
+    <hr>
+    <span>Hiện đáp án và câu hỏi</span>
+    <button id="2cats">Hiện 2 chủ đề</button>
+    <button id="openCat">Hiện chủ đề</button>
+    <button id="openA1">Hiện đáp án 1</button>
+    <button id="openA2">Hiện đáp án 2</button>
+    <button id="openA3">Hiện đáp án 3</button>
+    <button id="openA4">Hiện đáp án 4</button>
+    <button id="openQ">Hiện câu hỏi</button>
   </div>
-
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const playerSocket = io('/player');
-    const hostSocket = io('/host');
-
-    document.getElementById('plus1').addEventListener('click', () => {
-      hostSocket.emit('plus1');
-    });
-
-
-  </script>
+  <script src="/howler/dist/howler.js"></script>
+  <script src="/scripts/xlsx.full.min.js"></script>
+  <script src="/scripts/readxlfile.js"></script>
+  <script src="/scripts/host.js"></script>
 </body>
 
 </html>
