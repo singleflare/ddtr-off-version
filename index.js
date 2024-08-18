@@ -130,4 +130,10 @@ hostNamespace.on('connection', (ioClientHost) => {
   ioClientHost.on('show q', () => {
     playerNamespace.emit('show q')
   })
+  ioClientHost.on('countdown 60', () => {
+    playerNamespace.emit('countdown 60')
+  })
+  ioClientHost.on('end clock', () => {
+    playerNamespace.emit('end clock')
+  })
 });

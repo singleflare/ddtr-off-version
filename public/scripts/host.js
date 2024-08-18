@@ -72,3 +72,10 @@ document.getElementById('openA4').addEventListener('click', () => {
 document.getElementById('openQ').addEventListener('click', () => {
   hostSocket.emit('show q')
 });
+
+document.getElementById('60s').addEventListener('click', () => {
+  hostSocket.emit('countdown 60');
+});
+document.getElementById('endClock').addEventListener('click', () => {
+  hostSocket.emit('end clock');
+});

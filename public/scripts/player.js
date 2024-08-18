@@ -93,22 +93,16 @@ function disableMinusIfNoMoney() {
 disableMinusIfNoMoney()
 
 function opacityAns1() {
-  $('#a1').css('opacity', '0.8')
   $('#a1').css('background-color', 'red')
-  $('#money1').css('background-color', 'gray')
-  $('#money1text').css('color', 'white')
 }
 function opacityAns2() {
-  $('#a2').css('opacity', '0.5')
-  $('#money2').css('opacity', '0.5', 'color', 'red')
+  $('#a2').css('background-color', 'red')
 }
 function opacityAns3() {
-  $('#a3').css('opacity', '0.5')
-  $('#money3').css('opacity', '0.5', 'color', 'red')
+  $('#a3').css('background-color', 'red')
 }
 function opacityAns4() {
-  $('#a4').css('opacity', '0.5')
-  $('#money4').css('opacity', '0.5', 'color', 'red')
+  $('#a4').css('background-color', 'red')
 }
 
 function changeMoney(operation, ansPosition) {
@@ -214,6 +208,34 @@ function playSound(sound) {
   sound.play()
 }
 
+let countdown;
+function endClock() {
+  clearInterval(countdown)
+  document.getElementById('timer').innerHTML = '<p>0</p>'
+}
+function countdown60() {
+  let time = 59
+  document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+  countdown = setInterval(() => {
+    time -= 1
+    document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+    if (time == 0) {
+      clearInterval(countdown)
+    }
+  }, 1000)
+}
+function countdown30() {
+  let time = 29
+  document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+  countdown = setInterval(() => {
+    time -= 1
+    document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+    if (time == 0) {
+      clearInterval(countdown)
+    }
+  }, 1000)
+}
+
 //event emissions
 plus1btn.addEventListener('click', () => { playerSocket.emit('plus1') })
 plus2btn.addEventListener('click', () => { playerSocket.emit('plus2') })
@@ -299,3 +321,6 @@ playerSocket.on('show ans 2', () => $('#a2 p').css('opacity', 1))
 playerSocket.on('show ans 3', () => $('#a3 p').css('opacity', 1))
 playerSocket.on('show ans 4', () => $('#a4 p').css('opacity', 1))
 playerSocket.on('show q', () => $('#q').css('opacity', 1))
+
+playerSocket.on('countdown 60', () => countdown60())
+playerSocket.on('end clock', () => endClock())
