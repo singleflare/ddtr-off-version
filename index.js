@@ -1,17 +1,14 @@
 const express = require('express');
-const { createServer } = require('node:http');
-const { join } = require('node:path');
-const { Server } = require('socket.io');
-
 const app = express();
+const server = app.listen(process.env.PORT || 3000)
 app.use(express.static('public'));
-const server = createServer(app);
-const ioServer = new Server(server);
 
-server.listen(3000, () => {
-  console.log('Player: http://localhost:3000/player');
-  console.log('Host: http://localhost:3000/host');
-});
+const { join } = require('path');
+const ioServer = require('socket.io')(server)
+
+
+console.log('Player: http://localhost:3000/player');
+console.log('Host: http://localhost:3000/host');
 
 app.get('/', (req, res) => {
   res.send("HelloWorld")
@@ -108,10 +105,56 @@ hostNamespace.on('connection', (ioClientHost) => {
     playerNamespace.emit('ans 4 wrong')
     hostNamespace.emit('ans 4 wrong')
   })
-  ioClientHost.on('toQ1', (q11json) => {
-    console.log(q11json)
-    playerNamespace.emit('toQ1', q11json)
+
+  ioClientHost.on('load q11', (data) => {
+    playerNamespace.emit('load q11', data)
   })
+  ioClientHost.on('load q12', (data) => {
+    playerNamespace.emit('load q12', data)
+  })
+  ioClientHost.on('load q21', (data) => {
+    playerNamespace.emit('load q21', data)
+  })
+  ioClientHost.on('load q22', (data) => {
+    playerNamespace.emit('load q22', data)
+  })
+  ioClientHost.on('load q31', (data) => {
+    playerNamespace.emit('load q31', data)
+  })
+  ioClientHost.on('load q32', (data) => {
+    playerNamespace.emit('load q32', data)
+  })
+  ioClientHost.on('load q41', (data) => {
+    playerNamespace.emit('load q41', data)
+  })
+  ioClientHost.on('load q42', (data) => {
+    playerNamespace.emit('load q42', data)
+  })
+  ioClientHost.on('load q51', (data) => {
+    playerNamespace.emit('load q51', data)
+  })
+  ioClientHost.on('load q52', (data) => {
+    playerNamespace.emit('load q52', data)
+  })
+  ioClientHost.on('load q61', (data) => {
+    playerNamespace.emit('load q61', data)
+  })
+  ioClientHost.on('load q62', (data) => {
+    playerNamespace.emit('load q62', data)
+  })
+  ioClientHost.on('load q71', (data) => {
+    playerNamespace.emit('load q71', data)
+  })
+  ioClientHost.on('load q72', (data) => {
+    playerNamespace.emit('load q72', data)
+  })
+  ioClientHost.on('load q81', (data) => {
+    playerNamespace.emit('load q81', data)
+  })
+  ioClientHost.on('load q82', (data) => {
+    playerNamespace.emit('load q82', data)
+  })
+
   ioClientHost.on('show ans 1', () => {
     playerNamespace.emit('show ans 1')
   })
@@ -133,7 +176,41 @@ hostNamespace.on('connection', (ioClientHost) => {
   ioClientHost.on('countdown 60', () => {
     playerNamespace.emit('countdown 60')
   })
+  ioClientHost.on('countdown 30', () => {
+    playerNamespace.emit('countdown 30')
+  })
   ioClientHost.on('end clock', () => {
     playerNamespace.emit('end clock')
+  })
+  ioClientHost.on('set money', (money) => {
+    playerNamespace.emit('set money', money)
+  })
+  ioClientHost.on('reset money put', () => {
+    playerNamespace.emit('reset money put')
+  })
+
+  ioClientHost.on('start q sound', () => {
+    playerNamespace.emit('start q sound')
+  })
+  ioClientHost.on('start prog sound', () => {
+    playerNamespace.emit('start prog sound')
+  })
+  ioClientHost.on('after 60s sound', () => {
+    playerNamespace.emit('after 60s sound')
+  })
+  ioClientHost.on('before q sound', () => {
+    playerNamespace.emit('before q sound')
+  })
+  ioClientHost.on('pass q sound', () => {
+    playerNamespace.emit('pass q sound')
+  })
+  ioClientHost.on('win sound', () => {
+    playerNamespace.emit('win sound')
+  })
+  ioClientHost.on('lose sound', () => {
+    playerNamespace.emit('lose sound')
+  })
+  ioClientHost.on('stop all sounds', () => {
+    playerNamespace.emit('stop all sounds')
   })
 });

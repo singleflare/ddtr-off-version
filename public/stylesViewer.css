@@ -1,0 +1,87 @@
+body {
+  position: relative;
+  margin: 0px;
+  aspect-ratio: 16 / 9;
+  background-color: black;
+  width: 85vw;
+}
+
+img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+#q {
+  font-size: 3vw;
+  position: absolute;
+  top: 12%;
+  left: 15%;
+  height: 30%;
+  width: 70%;
+  color: white;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+}
+
+#qTable {
+  text-align: center;
+  width: 100%;
+}
+
+#ans {
+  position: absolute;
+  top: 64.4%;
+  left: 4.1%;
+  width: 91.5%;
+  height: 23.5%;
+  color: white;
+}
+
+#ans div {
+  position: absolute;
+  text-align: center;
+  width: 23.5%;
+  font-size: 2.5vw;
+  height: 100%;
+}
+
+#money {
+  position: absolute;
+  top: 87.4%;
+  left: 4.1%;
+  width: 91.5%;
+  height: 4.4%;
+  color: black;
+}
+
+#money div {
+  position: absolute;
+  text-align: center;
+  width: 23.5%;
+  font-size: 1.5vw;
+  height: 100%;
+}
+
+#a1,
+#m1 {
+  left: 0%;
+}
+
+#a2,
+#m2 {
+  left: 25.5%;
+}
+
+#a3,
+#m3 {
+  left: 51%;
+}
+
+#a4,
+#m4 {
+  left: 76.5%;
+}

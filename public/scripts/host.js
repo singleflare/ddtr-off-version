@@ -76,6 +76,43 @@ document.getElementById('openQ').addEventListener('click', () => {
 document.getElementById('60s').addEventListener('click', () => {
   hostSocket.emit('countdown 60');
 });
+document.getElementById('30s').addEventListener('click', () => {
+  hostSocket.emit('countdown 30');
+});
 document.getElementById('endClock').addEventListener('click', () => {
   hostSocket.emit('end clock');
+});
+
+document.getElementById('setMoneyBtn').addEventListener('click', () => {
+  const money = document.getElementById('setMoney').value;
+  hostSocket.emit('set money', money);
+});
+
+document.getElementById('resetMoneyPut').addEventListener('click', () => {
+  hostSocket.emit('reset money put');
+})
+
+document.getElementById('startQ').addEventListener('click', () => {
+  hostSocket.emit('start q sound');
+});
+document.getElementById('startProg').addEventListener('click', () => {
+  hostSocket.emit('start prog sound');
+});
+document.getElementById('after60s').addEventListener('click', () => {
+  hostSocket.emit('after 60s sound');
+});
+document.getElementById('beforeQ').addEventListener('click', () => {
+  hostSocket.emit('before q sound');
+});
+document.getElementById('passQ').addEventListener('click', () => {
+  hostSocket.emit('pass q sound');
+});
+document.getElementById('win').addEventListener('click', () => {
+  hostSocket.emit('win sound');
+});
+document.getElementById('lose').addEventListener('click', () => {
+  hostSocket.emit('lose sound');
+});
+document.getElementById('stopAll').addEventListener('click', () => {
+  hostSocket.emit('stop all sounds');
 });

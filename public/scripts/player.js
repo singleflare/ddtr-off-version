@@ -5,7 +5,6 @@ let money2 = 0
 let money3 = 0
 let money4 = 0
 let remainMoney = 200
-let currentMoneyIn60s = remainMoney
 
 let money1para = document.getElementById('money1text')
 let money2para = document.getElementById('money2text')
@@ -92,16 +91,31 @@ function disableMinusIfNoMoney() {
 }
 disableMinusIfNoMoney()
 
-function opacityAns1() {
+function disablePlusIf0() {
+  if (remainMoney == 0) {
+    console.log(remainMoney)
+    plus1btn.disabled = true
+    plus2btn.disabled = true
+    plus3btn.disabled = true
+    plus4btn.disabled = true
+  } else {
+    plus1btn.disabled = false
+    plus2btn.disabled = false
+    plus3btn.disabled = false
+    plus4btn.disabled = false
+  }
+}
+
+function wrongAns1() {
   $('#a1').css('background-color', 'red')
 }
-function opacityAns2() {
+function wrongAns2() {
   $('#a2').css('background-color', 'red')
 }
-function opacityAns3() {
+function wrongAns3() {
   $('#a3').css('background-color', 'red')
 }
-function opacityAns4() {
+function wrongAns4() {
   $('#a4').css('background-color', 'red')
 }
 
@@ -144,12 +158,12 @@ function changeMoney(operation, ansPosition) {
       }
     }
     if (ansPosition == "remain") {
-      currentMoneyIn60s += 5
-      if (currentMoneyIn60s == 0) {
+      remainMoney += 5
+      if (remainMoney == 0) {
         remainMoneyPara.innerHTML = '0<span> đồng</span>'
       }
       else {
-        remainMoneyPara.innerHTML = `${currentMoneyIn60s}<span>.000.000 đồng</span>`
+        remainMoneyPara.innerHTML = `${remainMoney}<span>.000.000 đồng</span>`
       }
     }
   }
@@ -192,45 +206,57 @@ function changeMoney(operation, ansPosition) {
       }
     }
     if (ansPosition == "remain") {
-      currentMoneyIn60s -= 5
-      if (currentMoneyIn60s == 0) {
+      remainMoney -= 5
+      if (remainMoney == 0) {
         remainMoneyPara.innerHTML = '0<span> đồng</span>'
       }
       else {
-        remainMoneyPara.innerHTML = `${currentMoneyIn60s}<span>.000.000 đồng</span>`
+        remainMoneyPara.innerHTML = `${remainMoney}<span>.000.000 đồng</span>`
       }
     }
   }
 }
 
-function playSound(sound) {
-  var sound = new Howl({ src: ['/sounds/' + sound] })
-  sound.play()
-}
-
 let countdown;
 function endClock() {
+  sounds.minute.stop()
+  sounds.halfMinute.stop()
+  sounds.minuteSoon.play('endSoon')
+  disableAllButtons()
   clearInterval(countdown)
   document.getElementById('timer').innerHTML = '<p>0</p>'
+  $('#timer').css('background-color', 'red')
 }
 function countdown60() {
+  sounds.minute.play()
+  $('#timer').css('background-color', 'black')
   let time = 59
   document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
   countdown = setInterval(() => {
     time -= 1
     document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+    if (time == 10) {
+      $('#timer').css('background-color', 'red')
+    }
     if (time == 0) {
+      disableAllButtons()
       clearInterval(countdown)
     }
   }, 1000)
 }
 function countdown30() {
+  sounds.halfMinute.play('half')
+  $('#timer').css('background-color', 'black')
   let time = 29
   document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
   countdown = setInterval(() => {
     time -= 1
     document.getElementById('timer').innerHTML = '<p>' + time + '</p>'
+    if (time == 10) {
+      $('#timer').css('background-color', 'red')
+    }
     if (time == 0) {
+      disableAllButtons()
       clearInterval(countdown)
     }
   }, 1000)
@@ -251,76 +277,199 @@ playerSocket.on('plus1', () => {
   changeMoney("+", 1)
   changeMoney("-", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('plus2', () => {
   changeMoney("+", 2)
   changeMoney("-", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('plus3', () => {
   changeMoney("+", 3)
   changeMoney("-", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('plus4', () => {
   changeMoney("+", 4)
   changeMoney("-", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('minus1', () => {
   changeMoney("-", 1)
   changeMoney("+", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('minus2', () => {
   changeMoney("-", 2)
   changeMoney("+", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('minus3', () => {
   changeMoney("-", 3)
   changeMoney("+", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('minus4', () => {
   changeMoney("-", 4)
   changeMoney("+", "remain")
   disableMinusIfNoMoney()
+  disablePlusIf0()
 })
 playerSocket.on('disableA4', () => disableA4())
 playerSocket.on('disableA1', () => disableA1())
-playerSocket.on('enableA4', () => enableA4())
-playerSocket.on('enableA1', () => enableA1())
+playerSocket.on('enableA4', () => {
+  enableA4();
+  disableMinusIfNoMoney();
+  disablePlusIf0()
+})
+playerSocket.on('enableA1', () => {
+  enableA1();
+  disableMinusIfNoMoney();
+  disablePlusIf0()
+})
 playerSocket.on('disableAllButtons', () => disableAllButtons())
-playerSocket.on('enableAllButtons', () => enableAllButtons())
+playerSocket.on('enableAllButtons', () => {
+  enableAllButtons();
+  disableMinusIfNoMoney();
+  disablePlusIf0()
+})
 
-playerSocket.on('ans 1 wrong', () => { opacityAns1(); playSound('sai.wav') })
-playerSocket.on('ans 2 wrong', () => { opacityAns2(); playSound('sai.wav') })
-playerSocket.on('ans 3 wrong', () => { opacityAns3(); playSound('sai.wav') })
-playerSocket.on('ans 4 wrong', () => { opacityAns4(); playSound('sai.wav') })
+playerSocket.on('ans 1 wrong', () => {
+  sounds.wrong.play()
+  setTimeout(() => { wrongAns1(); }, 1000)
+})
+playerSocket.on('ans 2 wrong', () => {
+  sounds.wrong.play()
+  setTimeout(() => { wrongAns2(); }, 1000)
+})
+playerSocket.on('ans 3 wrong', () => {
+  sounds.wrong.play()
+  setTimeout(() => { wrongAns3(); }, 1000)
+})
+playerSocket.on('ans 4 wrong', () => {
+  sounds.wrong.play()
+  setTimeout(() => { wrongAns4(); }, 1000)
+})
 
-playerSocket.on('toQ1', (q11json) => {
+function opacityAndLoadQuestionData(data) {
+  $('#a1, #a2, #a3, #a4').css('background-color', 'black')
   $('#category p').css('opacity', 0)
   $('#q').css('opacity', 0)
-  $('#a1 p').css('opacity', 0)
-  $('#a2 p').css('opacity', 0)
-  $('#a3 p').css('opacity', 0)
-  $('#a4 p').css('opacity', 0)
+  $('#a1 p,#a2 p,#a3 p,#a4 p').css('opacity', 0)
 
-  $('#category p').text(q11json.cat)
-  $('#q').text(q11json.question)
-  $('#a1 p').text(q11json.ans1)
-  $('#a2 p').text(q11json.ans2)
-  $('#a3 p').text(q11json.ans3)
-  $('#a4 p').text(q11json.ans4)
+  $('#category p').text(data.c)
+  $('#q').text(data.q)
+  $('#a1 p').text(data.a1)
+  $('#a2 p').text(data.a2)
+  $('#a3 p').text(data.a3)
+  $('#a4 p').text(data.a4)
+}
+playerSocket.on('load q11', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q12', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q21', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q22', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q31', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q32', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q41', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q42', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q51', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q52', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q61', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q62', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q71', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q72', (data) => {
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q81', (data) => {
+  isQ8 = true;
+  opacityAndLoadQuestionData(data)
+})
+playerSocket.on('load q82', (data) => {
+  isQ8 = true;
+  opacityAndLoadQuestionData(data)
 })
 
 playerSocket.on('show cat', () => $('#category p').css('opacity', 1))
-playerSocket.on('show ans 1', () => $('#a1 p').css('opacity', 1))
-playerSocket.on('show ans 2', () => $('#a2 p').css('opacity', 1))
-playerSocket.on('show ans 3', () => $('#a3 p').css('opacity', 1))
-playerSocket.on('show ans 4', () => $('#a4 p').css('opacity', 1))
+playerSocket.on('show ans 1', () => {
+  $('#a1 p').css('opacity', 1)
+  sounds.showQ.play()
+})
+playerSocket.on('show ans 2', () => {
+  $('#a2 p').css('opacity', 1)
+  if (isQ8) {
+    sounds.showQ.play()
+  }
+  sounds.catChosen.play()
+})
+playerSocket.on('show ans 3', () => {
+  $('#a3 p').css('opacity', 1)
+  sounds.catChosen.play()
+})
+playerSocket.on('show ans 4', () => {
+  $('#a4 p').css('opacity', 1)
+  sounds.catChosen.play()
+})
 playerSocket.on('show q', () => $('#q').css('opacity', 1))
 
 playerSocket.on('countdown 60', () => countdown60())
 playerSocket.on('end clock', () => endClock())
+playerSocket.on('countdown 30', () => countdown30())
+
+playerSocket.on('set money', (money) => { remainMoney = money; remainMoneyPara.innerHTML = `${remainMoney}<span>.000.000 đồng</span>` })
+
+playerSocket.on('reset money put', () => {
+  money1 = 0
+  money2 = 0
+  money3 = 0
+  money4 = 0
+
+  money1para.innerHTML = '0<span> đồng</span>'
+  money2para.innerHTML = '0<span> đồng</span>'
+  money3para.innerHTML = '0<span> đồng</span>'
+  money4para.innerHTML = '0<span> đồng</span>'
+
+  disableMinusIfNoMoney()
+})
+
+playerSocket.on('start q sound', () => sounds.startQ.play())
+playerSocket.on('start prog sound', () => sounds.startProg.play())
+playerSocket.on('after 60s sound', () => sounds.bgmOpenCorrect.play())
+playerSocket.on('before q sound', () => sounds.bgmBefore60s.play())
+playerSocket.on('pass q sound', () => sounds.qPassed.play())
+playerSocket.on('win sound', () => sounds.win.play())
+playerSocket.on('lose sound', () => sounds.lose.play())
+playerSocket.on('stop all sounds', () => {
+  Howler.stop()
+})

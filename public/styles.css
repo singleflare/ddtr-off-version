@@ -1,6 +1,6 @@
 p {
   color: white;
-  font-size: 20pt;
+  font-size: 18pt;
 }
 
 body {
@@ -28,13 +28,13 @@ button:hover {
 }
 
 #q {
-  height: 150px;
+  height: 100px;
 }
 
 .a {
   background-color: black;
   width: 500px;
-  height: 200px;
+  height: 100px;
   text-align: center;
   border: 3px solid white;
 }
@@ -57,7 +57,7 @@ button:hover {
 }
 
 #timer {
-  background-color: gray;
+  background-color: black;
 }
 
 .in4 {

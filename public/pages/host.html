@@ -10,57 +10,6 @@
 </head>
 
 <body>
-  <input type="file" id="xlsxFileInput">
-  <div id="info">
-    <div id="players" class="in4" style="width:500px">
-      <p>NC1 & NC2</p>
-    </div>
-    <div id="blank" class="in4" style="width:1000px"></div>
-    <div id="qnumber" class="in4" style="width:100px">
-      <p>Câu</p>
-    </div>
-    <div id="category" class="in4" style="width:200px">
-      <p>CĐ</p>
-    </div>
-    <div id="money" class="in4" style="width:200px">
-      <p id="remainMoneyText">200<span>.000.000 đồng</span></p>
-    </div>
-    <div id="timer" class="in4" style="width:75px">
-      <p>60</p>
-    </div>
-  </div>
-  <div style="text-align: center; border:3px solid white;height:100px">
-    <p id="q">CH</p>
-  </div>
-  <div id="ans">
-    <div id="a1" class="a">
-      <p>a1</p>
-    </div>
-    <div id="a2" class="a">
-      <p>a2</p>
-    </div>
-    <div id="a3" class="a">
-      <p>a3</p>
-    </div>
-    <div id="a4" class="a">
-      <p>a4</p>
-    </div>
-  </div>
-  <div id="moneyContainer">
-    <div id="money1" class="money">
-      <p style="color:black;margin:0" id="money1text">0<span> đồng</span></p>
-    </div>
-    <div id="money2" class="money">
-      <p style="color:black;margin:0" id="money2text">0<span> đồng</span></p>
-    </div>
-    <div id="money3" class="money">
-      <p style="color:black;margin:0" id="money3text">0<span> đồng</span></p>
-    </div>
-    <div id="money4" class="money">
-      <p style="color:black;margin:0" id="money4text">0<span> đồng</span></p>
-    </div>
-  </div>
-
   <div id="controlButtons" style="margin-top:5px">
     <span>Tắt đáp án/nút</span>
     <button id="disableA4">Tắt đáp án 4</button>
@@ -79,15 +28,23 @@
     <button id="endClock">Dừng thời gian</button>
     <hr>
     <span>Tải câu hỏi</span>
-    <button id="uploadQ">Tải bộ câu hỏi</button>
-    <button id="toQ1">Tải câu 1</button>
-    <button id="toQ2">Tải câu 2</button>
-    <button id="toQ3">Tải câu 3</button>
-    <button id="toQ4">Tải câu 4</button>
-    <button id="toQ5">Tải câu 5</button>
-    <button id="toQ6">Tải câu 6</button>
-    <button id="toQ7">Tải câu 7</button>
-    <button id="toQ8">Tải câu 8</button>
+    <input type="file" id="xlsxFileInput">
+    <button id="loadQ11">C1 CĐ1</button>
+    <button id="loadQ12">C1 CĐ2</button>
+    <button id="loadQ21">C2 CĐ1</button>
+    <button id="loadQ22">C2 CĐ2</button>
+    <button id="loadQ31">C3 CĐ1</button>
+    <button id="loadQ32">C3 CĐ2</button>
+    <button id="loadQ41">C4 CĐ1</button>
+    <button id="loadQ42">C4 CĐ2</button>
+    <button id="loadQ51">C5 CĐ1</button>
+    <button id="loadQ52">C5 CĐ2</button>
+    <button id="loadQ61">C6 CĐ1</button>
+    <button id="loadQ62">C6 CĐ2</button>
+    <button id="loadQ71">C7 CĐ1</button>
+    <button id="loadQ72">C7 CĐ2</button>
+    <button id="loadQ81">C8 CĐ1</button>
+    <button id="loadQ82">C8 CĐ2</button>
     <hr>
     <span>Hiện đáp án và câu hỏi</span>
     <button id="2cats">Hiện 2 chủ đề</button>
@@ -97,9 +54,23 @@
     <button id="openA3">Hiện đáp án 3</button>
     <button id="openA4">Hiện đáp án 4</button>
     <button id="openQ">Hiện câu hỏi</button>
+    <hr>
+    <input type="number" id="setMoney" name="setMoney" value="0">
+    <button for="setMoney" id="setMoneyBtn">Đặt tiền</button>
+    <button id="resetMoneyPut">Đặt lại tiền 4 đáp án về 0</button>
+    <hr>
+    <span>Âm thanh</span>
+    <button id="startQ">Bắt đầu câu hỏi</button>
+    <button id="startProg">Bắt đầu chương trình</button>
+    <button id="after60s">Nền mở đáp án</button>
+    <button id="beforeQ">Nền trước 60s</button>
+    <button id="passQ">Sau đáp án đúng</button>
+    <button id="win">Thắng</button>
+    <button id="lose">Thua</button>
+    <button id="stopAll">Dừng tất cả âm thanh</button>
+
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <!-- <script src="/howler/dist/howler.js"></script> -->
   <script src="/scripts/xlsx.full.min.js"></script>
   <script src="/scripts/readxlfile.js"></script>
   <script src="/scripts/host.js"></script>
